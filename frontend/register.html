@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MediQueue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+
+        /* ── RESET ── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #f4f8fb;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        a { text-decoration: none; color: inherit; }
+        button { font-family: 'Nunito', sans-serif; cursor: pointer; border: none; }
+
+        /* ── NAVBAR ── */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: #007bff;
+            color: white;
+            box-shadow: 0 2px 12px rgba(0,123,255,0.3);
+        }
+        .logo img { width: 180px; object-fit: contain; }
+        .logo-text {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            display: none;
+        }
+        .logo-text span { color: #7dd3fc; }
+        .nav-right { font-size: 0.9rem; color: rgba(255,255,255,0.85); }
+        .nav-right a { color: white; font-weight: 700; text-decoration: underline; }
+
+        /* ── MAIN LAYOUT ── */
+        .page-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(0,123,255,0.12);
+            padding: 44px 48px;
+            width: 100%;
+            max-width: 480px;
+            animation: fadeUp 0.5s ease both;
+        }
+
+        /* Card header */
+        .card-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .card-logo { margin-bottom: 16px; }
+        .card-logo img { height: 50px; margin: 0 auto; object-fit: contain; }
+        .card-logo .card-logo-text {
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #007bff;
+            display: none;
+        }
+        .card-logo .card-logo-text span { color: #00c2d4; }
+        .card-header h1 {
+            font-family: 'Lora', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #1a2332;
+            margin-bottom: 6px;
+        }
+        .card-header p { font-size: 0.9rem; color: #6b84a0; }
+
+        /* ── ROLE SELECTOR ── */
+        .role-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .role-btn {
+            flex: 1;
+            padding: 11px 8px;
+            border: 1.5px solid #dce8f5;
+            border-radius: 10px;
+            background: #f4f8fb;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #6b84a0;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .role-btn:hover { border-color: #007bff; color: #007bff; }
+        .role-btn.active {
+            border-color: #007bff;
+            background: rgba(0,123,255,0.07);
+            color: #007bff;
+        }
+        .role-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+
+        /* ── FORM FIELDS ── */
+        .field { margin-bottom: 16px; }
+        .field label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #3d5068;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #dce8f5;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            color: #1a2332;
+            background: #f4f8fb;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+        }
+        .field input:focus,
+        .field select:focus {
+            border-color: #007bff;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        .field input.error,
+        .field select.error { border-color: #e53e3e; }
+
+        /* Two fields side by side */
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* Password wrapper */
+        .input-wrap { position: relative; }
+        .input-wrap input { padding-right: 46px; }
+        .eye-btn {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #6b84a0;
+        }
+
+        /* Error messages */
+        .err-msg {
+            font-size: 0.78rem;
+            color: #e53e3e;
+            margin-top: 5px;
+            display: none;
+        }
+        .err-msg.show { display: block; }
+
+        /* Password strength bar */
+        .strength-bar {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .seg {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: #dce8f5;
+            transition: background 0.3s;
+        }
+        .strength-label {
+            font-size: 0.75rem;
+            color: #6b84a0;
+            margin-top: 4px;
+        }
+
+        /* Doctor-only fields (hidden by default) */
+        .doctor-only { display: none; }
+        .doctor-only.show { display: block; }
+
+        /* ── ALERT ── */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .alert.error {
+            display: block;
+            background: rgba(229,62,62,0.08);
+            color: #e53e3e;
+            border: 1px solid rgba(229,62,62,0.2);
+        }
+        .alert.success {
+            display: block;
+            background: rgba(0,123,255,0.08);
+            color: #007bff;
+            border: 1px solid rgba(0,123,255,0.2);
+        }
+
+        /* ── SUBMIT BUTTON ── */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 800;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(0,123,255,0.3);
+            margin-top: 8px;
+        }
+        .submit-btn:hover {
+            background: #0056d6;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0,123,255,0.35);
+        }
+        .submit-btn:disabled { opacity: 0.7; transform: none; cursor: not-allowed; }
+
+        /* Spinner */
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto;
+        }
+        .spinner.show { display: inline-block; }
+        .btn-text.hide { display: none; }
+
+        /* Bottom link */
+        .bottom-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #6b84a0;
+        }
+        .bottom-link a { color: #007bff; font-weight: 700; }
+        .bottom-link a:hover { text-decoration: underline; }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="header">
+        <div class="logo">
+            <img
+                src="images/MediQueue_logo.png"
+                alt="MediQueue"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+            >
+            <div class="logo-text">Medi<span>Queue</span></div>
+        </div>
+        <div class="nav-right">
+            Already have an account? <a href="login.html">Sign In</a>
+        </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <div class="page-body">
+        <div class="card">
+
+            <!-- Card header -->
+            <div class="card-header">
+                <div class="card-logo">
+                    <img
+                        src="images/MediQueue_logo.png"
+                        alt="MediQueue"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                    >
+                    <div class="card-logo-text">Medi<span>Queue</span></div>
+                </div>
+                <h1>Create Account</h1>
+                <p>Join MediQueue and book smarter appointments</p>
+            </div>
+
+            <!-- Role selector: Patient / Doctor -->
+            <div class="role-row">
+                <button type="button" class="role-btn active" onclick="setRole(this,'patient')">
+                    <span class="role-icon">🤒</span> Patient
+                </button>
+                <button type="button" class="role-btn" onclick="setRole(this,'doctor')">
+                    <span class="role-icon">👨‍⚕️</span> Doctor
+                </button>
+            </div>
+
+            <!-- Alert box -->
+            <div class="alert" id="alertBox"></div>
+
+            <!-- REGISTER FORM -->
+            <form id="registerForm" onsubmit="register(); return false;">
+
+                <!-- Name row -->
+                <div class="field-row">
+                    <div class="field">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" placeholder="Ali">
+                        <div class="err-msg" id="fnameErr">Required</div>
+                    </div>
+                    <div class="field">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" placeholder="Khan">
+                        <div class="err-msg" id="lnameErr">Required</div>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="ali@example.com" autocomplete="off">
+                    <div class="err-msg" id="emailErr">Enter a valid email.</div>
+                </div>
+
+                <!-- Phone -->
+                <div class="field">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+92 300 0000000">
+                    <div class="err-msg" id="phoneErr">Phone number is required.</div>
+                </div>
+
+                <!-- Doctor-only: Specialization -->
+                <div class="field doctor-only" id="specField">
+                    <label for="specialization">Specialization</label>
+                    <select id="specialization">
+                        <option value="">Select specialization</option>
+                        <option>Cardiology</option>
+                        <option>Neurology</option>
+                        <option>Dermatology</option>
+                        <option>Orthopedics</option>
+                        <option>Ophthalmology</option>
+                        <option>Dentistry</option>
+                        <option>Pulmonology</option>
+                        <option>General Medicine</option>
+                        <option>Pediatrics</option>
+                        <option>Gynecology</option>
+                    </select>
+                    <div class="err-msg" id="specErr">Please select a specialization.</div>
+                </div>
+
+                <!-- Password -->
+                <div class="field">
+                    <label for="password">Password</label>
+                    <div class="input-wrap">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a strong password"
+                            oninput="checkStrength(this.value)"
+                            autocomplete="new-password"
+                        >
+                        <button type="button" class="eye-btn" onclick="togglePwd('password','eye1')" id="eye1">👁️</button>
+                    </div>
+                    <!-- Password strength bar -->
+                    <div class="strength-bar">
+                        <div class="seg" id="s1"></div>
+                        <div class="seg" id="s2"></div>
+                        <div class="seg" id="s3"></div>
+                        <div class="seg" id="s4"></div>
+                    </div>
+                    <div class="strength-label" id="strengthLabel">Enter a password</div>
+                    <div class="err-msg" id="passErr">Password must be at least 8 characters.</div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="field">
+                    <label for="confirm">Confirm Password</label>
+                    <div class="input-wrap">
+                        <input type="password" id="confirm" placeholder="Repeat your password" autocomplete="new-password">
+                        <button type="button" class="eye-btn" onclick="togglePwd('confirm','eye2')" id="eye2">👁️</button>
+                    </div>
+                    <div class="err-msg" id="confirmErr">Passwords do not match.</div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text" id="btnText">Create Account</span>
+                    <span class="spinner" id="spinner"></span>
+                </button>
+
+            </form>
+
+            <div class="bottom-link">
+                Already have an account? <a href="login.html">Sign in →</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>

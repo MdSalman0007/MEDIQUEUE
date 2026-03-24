@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediQueue — Smart Doctor Appointment System</title>
+
+    <!--
+    ============================================================
+        GOOGLE FONTS
+        We load two fonts from the internet here:
+        - Lora      → used for big headings (serif, elegant look)
+        - Nunito    → used for all body text (round, readable)
+        If you want different fonts, change them at fonts.google.com
+    ============================================================
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* ============================================================
+            SECTION 1 — RESET & BASE
+            Browsers add their own spacing by default which breaks
+            layouts. We reset all of that to zero first, then
+            set our own styles cleanly from scratch.
+        ============================================================ */
+
+        /* Remove default margin/padding from every element */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* padding is included inside width, not added on top */
+        }
+
+        html {
+            scroll-behavior: smooth; /* smooth scrolling when clicking anchor links */
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #f4f8fd;
+            color: #1a2332;
+            overflow-x: hidden; /* prevents horizontal scrollbar */
+        }
+
+        /* Remove underline from all links globally */
+        a { text-decoration: none; color: inherit; }
+
+        /* Make all images responsive by default */
+        img { display: block; max-width: 100%; }
+
+        /* Apply our font to all buttons */
+        button { font-family: 'Nunito', sans-serif; cursor: pointer; border: none; }
+
+
+        /* ============================================================
+            SECTION 2 — HEADER / NAVBAR STYLES
+        ============================================================ */
+
+        .header {
+            /* Sticky = stays at top even when you scroll down */
+            position: sticky;
+            top: 0;
+            z-index: 100; /* floats above all other content */
+
+            /* Three items side by side with space between them */
+            display: flex;
+            align-items: center;          /* vertically center everything */
+            justify-content: space-between; /* logo | nav | button */
+
+            padding: 0 36px;  /* left/right breathing room */
+            height: 72px;
+            background: #1a6fd4;
+            box-shadow: 0 8px 32px rgba(26,111,212,0.14);
+        }
+
+        /* Logo container (holds the image) */
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 52px;
+        }
+        .logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        /* Fallback text shown if logo image file is missing */
+        .logo-text {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .logo-text span { color: #00c2d4; } /* "Queue" part in cyan */
+
+        /* The navigation links row */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;       /* small space between each link */
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 8px 18px;
+            border-radius: 999px;
+            color: rgba(255,255,255,0.88); /* slightly transparent white */
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s; /* smooth hover effect */
+        }
+
+        /* When you hover or when the link is "active" (current page) */
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255,255,255,0.15); /* subtle white highlight */
+            color: #ffffff;
+        }
+
+        /* The Login button on the right of the header */
+        .login-button {
+            padding: 10px 28px;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #1a6fd4;
+            font-size: 0.95rem;
+            font-weight: 800;
+            transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+            white-space: nowrap; /* prevents text from wrapping to next line */
+        }
+        .login-button:hover {
+            background: #00c2d4;
+            color: #ffffff;
+            transform: translateY(-1px); /* tiny lift effect on hover */
+            box-shadow: 0 6px 20px rgba(0,194,212,0.35);
+        }
+
+
+        /* ============================================================
+            SECTION 3 — HERO SECTION STYLES
+            This is the big first section with the headline + slider.
+            It uses Flexbox to put text on the left, image on the right.
+        ============================================================ */
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 80px;
+
+            /* Diagonal gradient background */
+            background: linear-gradient(130deg, #dbeeff 0%, #f0f8ff 50%, #e8fafc 100%);
+
+            /* Fill the full screen height minus the 72px header */
+            min-height: calc(100vh - 72px);
+
+            position: relative; /* needed so the ::before circles position correctly */
+            overflow: hidden;
+        }
+
+        /*
+            Decorative blurry circle — top right of hero
+            ::before is a "fake" element created by CSS only, no HTML needed.
+        */
+        .hero::before {
+            content: ''; /* required — without this it won't show */
+            position: absolute;
+            top: -120px; right: -120px;
+            width: 480px; height: 480px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(26,111,212,0.08) 0%, transparent 70%);
+            pointer-events: none; /* can't be accidentally clicked */
+        }
+
+        /* Decorative blurry circle — bottom left of hero */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; left: -80px;
+            width: 320px; height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,194,212,0.09) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* The text content on the left */
+        .hero-content {
+            max-width: 540px;
+            position: relative;
+            z-index: 1; /* sits above the decorative circles */
+            animation: fadeUp 0.7s ease both; /* slides up on page load */
+        }
+
+        /* Small pill badge above the heading: "Trusted by 10,000+ patients" */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e8f2ff;
+            border: 1px solid rgba(26,111,212,0.2);
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #1a6fd4;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        /* The pulsing dot inside the badge */
+        .hero-badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #00c2d4;
+            animation: pulse 2s infinite; /* breathes in/out forever */
+        }
+
+        /* Main hero heading */
+        .hero h1 {
+            font-family: 'Lora', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: #1a2332;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        /* The italic colored word inside the heading */
+        .hero h1 em {
+            font-style: italic;
+            color: #1a6fd4;
+        }
+
+        /* Paragraph below the heading */
+        .hero p {
+            font-size: 1.08rem;
+            color: #3d5068;
+            line-height: 1.75;
+            margin-bottom: 36px;
+        }
+
+        /* The two CTA buttons row */
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap; /* wraps to next line on small screens */
+        }
+
+        /* Solid blue "Book Appointment" button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 34px;
+            border-radius: 999px;
+            background: #1a6fd4;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 800;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 6px 24px rgba(26,111,212,0.30);
+        }
+        .btn:hover {
+            background: #1255a8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(26,111,212,0.38);
+        }
+
+        /* Outlined "View Doctors" button */
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 999px;
+            background: transparent;
+            color: #1a6fd4;
+            font-size: 1rem;
+            font-weight: 800;
+            border: 2px solid #1a6fd4;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+        }
+        .btn-outline:hover {
+            background: #1a6fd4;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Stats row: "200+ Doctors | 15+ Specs | 99% Satisfied" */
+        .hero-trust {
+            display: flex;
+            gap: 28px;
+            margin-top: 44px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(26,111,212,0.15);
+        }
+        .trust-item {
+            display: flex;
+            flex-direction: column; /* number on top, label below */
+        }
+        .trust-num {
+            font-family: 'Lora', serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: #1a6fd4;
+        }
+        .trust-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #6b84a0;
+            margin-top: 2px;
+        }
+
+
+        /* ============================================================
+            SECTION 4 — IMAGE SLIDER STYLES
+        ============================================================ */
+
+        /* The right side of the hero — the white card frame */
+        .hero-image {
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0; /* prevents it from shrinking when space is tight */
+            animation: fadeIn 0.9s 0.2s ease both; /* fades in slightly after text */
+        }
+
+        /* White rounded card that wraps the slider */
+        .slider-frame {
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 16px 56px rgba(26,111,212,0.18);
+            padding: 20px;
+            width: 360px;
+            position: relative;
+        }
+
+        /* The visible "window" — hides slides that are off to the side */
+        .slider {
+            width: 100%;
+            border-radius: 18px;
+            overflow: hidden; /* THIS is what hides the other slides */
+            position: relative;
+        }
+
+        /*
+            The sliding track — all 3 slides sit here side by side.
+            To show slide 2, we move this left by 100%.
+            To show slide 3, we move it left by 200%.
+        */
+        .slider-wrapper {
+            display: flex; /* puts all slides in one horizontal row */
+            transition: transform 0.75s cubic-bezier(0.77,0,0.18,1); /* smooth slide */
+        }
+
+        /* Each individual slide */
+        .slide {
+            width: 100%;
+            flex-shrink: 0; /* prevents slides from squishing together */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            min-height: 280px;
+        }
+        .slide img {
+            width: 100%;
+            max-width: 260px;
+            height: 260px;
+            object-fit: contain; /* scales image without cropping */
+            margin: auto;
+            border-radius: 16px;
+            
+        }
+
+        /* The dot indicators below the slider */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #dce8f5; /* grey when inactive */
+            transition: background 0.3s, width 0.3s;
+            cursor: pointer;
+        }
+        /* Active dot is blue and stretches into a pill shape */
+        .dot.active {
+            background: #1a6fd4;
+            width: 22px;
+            border-radius: 999px;
+        }
+
+        /* Small floating label — top right of slider card */
+        .slider-badge {
+            position: absolute;
+            top: 16px; right: -10px; /* sticks out slightly to the right */
+            background: #1a6fd4;
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 18px 0 0 18px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            box-shadow: 0 2px 12px rgba(26,111,212,0.10);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        /* Small floating label — bottom left of slider card */
+        .slider-badge2 {
+            position: absolute;
+            bottom: 60px; left: -10px; /* sticks out slightly to the left */
+            background: #00c2d4;
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 0 18px 18px 0;
+            font-size: 0.78rem;
+            font-weight: 700;
+            z-index: 10;
+            box-shadow: 0 2px 12px rgba(26,111,212,0.10);
+        }
+
+
+        /* ============================================================
+            SECTION 5 — "FIND DOCTORS NEAR YOU" STYLES
+            The location search with 3 dropdowns + search button.
+        ============================================================ */
+
+        .location-section {
+            background: #ffffff;
+            padding: 60px 80px;
+            text-align: center;
+            border-bottom: 1px solid #dce8f5;
+        }
+
+        .location-section h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a2332;
+            margin-bottom: 8px;
+        }
+        .location-section .section-sub {
+            font-size: 1rem;
+            color: #6b84a0;
+            margin-bottom: 36px;
+        }
+
+        /* The box containing all 3 dropdowns + button */
+        .location-box {
+            display: flex;
+            align-items: flex-end; /* aligns button to bottom of the row */
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            background: #f4f8fd;
+            border: 1px solid #dce8f5;
+            border-radius: 18px;
+            padding: 28px 32px;
+            max-width: 780px;
+            margin: 0 auto; /* centers the box */
+            box-shadow: 0 2px 12px rgba(26,111,212,0.10);
+        }
+
+        /* Each label + dropdown pair */
+        .select-group {
+            display: flex;
+            flex-direction: column; /* label on top, dropdown below */
+            gap: 6px;
+            flex: 1;
+            min-width: 160px;
+        }
+        .select-group label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #6b84a0;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            text-align: left;
+        }
+        .select-group select {
+            padding: 12px 36px 12px 16px; /* right padding leaves room for arrow */
+            border: 1.5px solid #dce8f5;
+            border-radius: 10px;
+            background: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: #1a2332;
+            outline: none;
+            appearance: none; /* hides the browser's default dropdown arrow */
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+
+            /* Custom dropdown arrow using an inline SVG */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b84a0' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+        }
+        .select-group select:focus {
+            border-color: #1a6fd4;
+            box-shadow: 0 0 0 3px rgba(26,111,212,0.1); /* blue glow when clicked */
+        }
+
+        /* Search button */
+        .search-btn {
+            padding: 13px 32px;
+            border-radius: 999px;
+            background: #1a6fd4;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(26,111,212,0.25);
+            white-space: nowrap;
+            align-self: flex-end;
+        }
+        .search-btn:hover {
+            background: #1255a8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26,111,212,0.32);
+        }
+
+
+        /* ============================================================
+            SECTION 6 — SPECIALIZATIONS GRID STYLES
+        ============================================================ */
+
+        .spec-section {
+            padding: 72px 80px;
+            background: #f4f8fd;
+        }
+
+        /* Centered heading block used by multiple sections */
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        /* Small colored pill above the section heading */
+        .section-tag {
+            display: inline-block;
+            padding: 5px 16px;
+            border-radius: 999px;
+            background: #e8f2ff;
+            color: #1a6fd4;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .section-header h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #1a2332;
+            margin-bottom: 10px;
+        }
+        .section-header p {
+            font-size: 1rem;
+            color: #6b84a0;
+        }
+
+        /* 4 equal columns grid for the specialization cards */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+            gap: 18px;
+        }
+
+        /* Each specialization card */
+        .spec-card {
+            background: #ffffff;
+            border: 1.5px solid #dce8f5;
+            border-radius: 18px;
+            padding: 28px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .spec-card:hover {
+            border-color: #1a6fd4;
+            transform: translateY(-4px); /* lifts the card on hover */
+            box-shadow: 0 8px 32px rgba(26,111,212,0.14);
+        }
+
+        .spec-icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .spec-card h4 {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #1a2332;
+            margin-bottom: 4px;
+        }
+        .spec-card p {
+            font-size: 0.78rem;
+            color: #6b84a0;
+        }
+
+
+        /* ============================================================
+            SECTION 7 — "HOW IT WORKS" STYLES
+        ============================================================ */
+
+        .how-section {
+            padding: 72px 80px;
+            background: #ffffff;
+        }
+
+        /* The 4-step grid — we also draw a connecting line through it */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+            position: relative; /* needed so ::before line positions correctly */
+        }
+
+        /*
+            The horizontal connecting line between the 4 circles.
+            It's drawn using ::before — a pure CSS line, no HTML needed.
+            It aligns with the vertical center of the numbered circles.
+        */
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 34px;  /* half of the 52px circle + padding offset = center of circles */
+            left:  calc(12.5% + 20px);  /* starts after the first circle */
+            right: calc(12.5% + 20px);  /* ends before the last circle */
+            height: 2px;
+            background: #dce8f5;
+            z-index: 0; /* sits behind the circles */
+        }
+
+        /* Each individual step card */
+        .step-card {
+            background: #f4f8fd;
+            border-radius: 18px;
+            padding: 28px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1; /* sits above the ::before line */
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(26,111,212,0.14);
+        }
+
+        /* The blue numbered circle at the top of each step */
+        .step-num-wrap {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%; /* makes it a circle */
+            background: #1a6fd4;
+            color: #ffffff;
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px; /* centers it and adds space below */
+            box-shadow: 0 4px 14px rgba(26,111,212,0.30);
+        }
+        .step-card h3 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .step-card p {
+            font-size: 0.83rem;
+            color: #6b84a0;
+            line-height: 1.65;
+        }
+
+
+        /* ============================================================
+            SECTION 8 — CTA BANNER STYLES
+            The full-width colored banner with the Register button.
+        ============================================================ */
+
+        .cta-banner {
+            /* Diagonal three-color gradient */
+            background: linear-gradient(120deg, #1255a8 0%, #1a6fd4 60%, #00c2d4 100%);
+            padding: 72px 80px;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative circle behind the banner content */
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -60px;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .cta-banner h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+        .cta-banner p {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            margin-bottom: 36px;
+        }
+
+        /* White button used inside the colored banner */
+        .btn-white {
+            display: inline-block;
+            padding: 15px 44px;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #1a6fd4;
+            font-size: 1rem;
+            font-weight: 800;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+        }
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+        }
+
+
+        /* ============================================================
+            SECTION 9 — FOOTER STYLES
+        ============================================================ */
+
+        footer {
+            background: #111c2d; /* very dark navy */
+            color: #ffffff;
+            padding: 40px 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* logo left, links right */
+            flex-wrap: wrap; /* wraps to 2 rows on small screens */
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .footer-logo span { color: #00c2d4; } /* "Queue" in cyan */
+
+        footer p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.38); /* dim copyright text */
+            margin-top: 5px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #ffffff; }
+
+
+        /* ============================================================
+            SECTION 10 — ANIMATIONS
+            These are reusable named animations you apply with:
+            animation: fadeUp 0.7s ease both;
+        ============================================================ */
+
+        /* Slides element up while fading it in */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Fades element in from invisible to visible */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Breathing / pulsing effect for the dot in the hero badge */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1);   opacity: 1; }
+            50%       { transform: scale(1.4); opacity: 0.6; }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+        HEADER — Sticky navigation bar at the top
+        Contains: Logo | Nav Links | Login Button
+    ============================================================ -->
+    <header class="header">
+
+        <!-- Logo: tries to load image, falls back to styled text if not found -->
+        <div class="logo">
+            <img
+                src="images/MediQueue_logo.png"
+                alt="MediQueue logo"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+            >
+            <!-- This text logo is hidden by default, shown only if image fails -->
+            <div class="logo-text" style="display:none">Medi<span>Queue</span></div>
+        </div>
+
+        <!-- Navigation links — add or remove <a> tags to change the menu -->
+        <nav class="nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#">About</a>
+            <a href="#">Doctors</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+            <a href="#">Help</a>
+        </nav>
+
+        <!-- Login button — links to login.html -->
+        <a href="login.html">
+            <button class="login-button">LogIn / SignUp</button>
+        </a>
+
+    </header>
+
+
+    <!-- ============================================================
+        HERO SECTION — The big first section visitors see
+        Left side: headline, paragraph, buttons, stats
+        Right side: auto-sliding image carousel
+    ============================================================ -->
+    <section class="hero">
+
+        <!-- LEFT: Text content -->
+        <div class="hero-content">
+
+            <!-- Small pill badge above the heading -->
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Trusted by 10,000+ patients
+            </div>
+
+            <!-- Main heading — edit your headline here -->
+            <h1>Skip the Queue.<br><em>Book Doctors</em><br>Instantly.</h1>
+
+            <!-- Subheading paragraph — edit your description here -->
+            <p>
+                MediQueue helps patients connect with trusted doctors,
+                schedule appointments easily, and avoid long waiting times.
+            </p>
+
+            <!-- Call-to-action buttons -->
+            <div class="hero-buttons">
+                <a href="login.html">
+                    <button class="btn">📅 Book Appointment</button>
+                </a>
+                <a href="register.html">
+                    <button class="btn-outline">👨‍⚕️ View Doctors</button>
+                </a>
+            </div>
+
+            <!-- Stats strip: 200+ Doctors | 15+ Specs | 99% Satisfied -->
+            <!-- To add a new stat: copy one .trust-item block and change the text -->
+            <div class="hero-trust">
+                <div class="trust-item">
+                    <span class="trust-num">200+</span>
+                    <span class="trust-label">Verified Doctors</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-num">15+</span>
+                    <span class="trust-label">Specializations</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-num">99%</span>
+                    <span class="trust-label">Satisfied Patients</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: Image slider inside a white card frame -->
+        <div class="hero-image">
+            <div class="slider-frame">
+
+                <!-- Floating label badges on the card — edit text here -->
+                <div class="slider-badge">⭐ Top Rated Doctors</div>
+                <div class="slider-badge2">✅ Instant Booking</div>
+
+                <!-- The actual slider -->
+                <div class="slider">
+                    <div class="slider-wrapper" id="sliderWrapper">
+
+                        <!-- SLIDE 1 — change src to swap image -->
+                        <div class="slide">
+                            <img src="images/hero_11.png" alt="Hero image 1">
+                        </div>
+
+                        <!-- SLIDE 2 — change src to swap image -->
+                        <div class="slide">
+                            <img src="images/hero_22.png" alt="Hero image 2">
+                        </div>
+
+                        <!-- SLIDE 3 — change src to swap image -->
+                        <!-- To add a 4th slide: copy this block, change src,
+                             and add another <div class="dot"></div> below -->
+                        <div class="slide">
+                            <img src="images/doctor_hero1.png" alt="Doctor hero image">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Dot indicators — one dot per slide -->
+                <div class="slider-dots" id="sliderDots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ============================================================
+        LOCATION SECTION — "Find Doctors Near You"
+        Three dropdowns (Country / State / City) + Search button
+    ============================================================ -->
+    <section class="location-section">
+
+        <h2>Find Doctors Near You</h2>
+        <p class="section-sub">Search by location to find the nearest available specialist</p>
+
+        <div class="location-box">
+
+            <!-- Country dropdown — add more <option> tags to add countries -->
+            <div class="select-group">
+                <label>Country</label>
+                <select>
+                    <option>Select Country</option>
+                    <option>Pakistan</option>
+                    <option>India</option>
+                    <option>USA</option>
+                    <option>UK</option>
+                </select>
+            </div>
+
+            <!-- State dropdown -->
+            <div class="select-group">
+                <label>State / Province</label>
+                <select>
+                    <option>Select State</option>
+                    <option>Punjab</option>
+                    <option>Sindh</option>
+                    <option>KPK</option>
+                    <option>Maharashtra</option>
+                    <option>Delhi</option>
+                </select>
+            </div>
+
+            <!-- City dropdown -->
+            <div class="select-group">
+                <label>City</label>
+                <select>
+                    <option>Select City</option>
+                    <option>Lahore</option>
+                    <option>Karachi</option>
+                    <option>Islamabad</option>
+                    <option>Mumbai</option>
+                    <option>New Delhi</option>
+                </select>
+            </div>
+
+            <!-- Search button — calls handleSearch() in the script below -->
+            <button class="search-btn" onclick="handleSearch()">🔍 Search Doctors</button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================================================
+        SPECIALIZATIONS SECTION — 8 cards in a 4-column grid
+        To add a new specialization: copy one .spec-card block,
+        change the emoji, h4 text, and p text.
+    ============================================================ -->
+    <section class="spec-section">
+
+        <div class="section-header">
+            <div class="section-tag">Browse by Specialization</div>
+            <h2>Find the Right Expert</h2>
+            <p>We cover all major medical specializations</p>
+        </div>
+
+        <div class="spec-grid">
+
+            <!-- Each card: emoji icon | specialty name | short description -->
+            <div class="spec-card" onclick="window.location='login.html'">
+                <span class="spec-icon">❤️</span>
+                <h4>Cardiology</h4>
+                <p>Heart & cardiovascular care</p>
+            </div>
+            <div class="spec-card" onclick="window.location='login.html'">
+                <span class="spec-icon">🧠</span>
+                <h4>Neurology</h4>
+                <p>Brain & nervous system</p>
+            </div>
+            <div class="spec-card" onclick="window.location='login.html'">
+                <span class="spec-icon">🦷</span>
+                <h4>Dentistry</h4>
+                <p>Oral & dental health</p>
+            </div>
+            <div class="spec-card" onclick="window.location='login.html'">
+                <span class="spec-icon">👁️</span>
+                <h4>Ophthalmology</h4>
+                <p>Eyes & vision care</p>
+            </div>
+            <div class="spec-card" onclick="window.location='login.html'">
+                <span class="spec-icon">🦴</span>
+                <h4>Orthopedics</h4>
+                <p>Bones, joints & spine</p>
+            </div>
+            <div class="spec-card" onclick="window.location='login.html'">
+                <span class="spec-icon">🧬</span>
+                <h4>Dermatology</h4>
+                <p>Skin, hair & nails</p>
+            </div>
+            <div class="spec-card" onclick="window.location='login.html'">
+                <span class="spec-icon">🫁</span>
+                <h4>Pulmonology</h4>
+                <p>Lungs & respiratory</p>
+            </div>
+            <div class="spec-card" onclick="window.location='login.html'">
+                <span class="spec-icon">🌡️</span>
+                <h4>General Medicine</h4>
+                <p>Primary healthcare</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================================================
+        HOW IT WORKS SECTION — 4 numbered steps in a grid
+        The connecting line between circles is drawn by CSS only.
+        To add a 5th step: copy a .step-card block and add it here.
+    ============================================================ -->
+    <section class="how-section">
+
+        <div class="section-header">
+            <div class="section-tag">Simple Process</div>
+            <h2>How MediQueue Works</h2>
+            <p>Book your appointment in just 4 easy steps</p>
+        </div>
+
+        <div class="steps-grid">
+
+            <div class="step-card">
+                <div class="step-num-wrap">1</div>
+                <h3>Create Account</h3>
+                <p>Register as a patient with your name, email, and phone — free of charge.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num-wrap">2</div>
+                <h3>Find a Doctor</h3>
+                <p>Browse by specialization or location. View profiles, ratings, and time slots.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num-wrap">3</div>
+                <h3>Book a Slot</h3>
+                <p>Choose your preferred date & time. Real-time availability — no double bookings.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-num-wrap">4</div>
+                <h3>Get Confirmed</h3>
+                <p>Receive instant confirmation. Manage or cancel from your patient dashboard.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================================================
+        CTA BANNER — Full-width colored call-to-action
+        Edit the heading, paragraph, and button text/link here.
+    ============================================================ -->
+    <section class="cta-banner">
+        <h2>Your Doctor is One Click Away</h2>
+        <p>Join thousands of patients using MediQueue for faster, smarter healthcare.</p>
+        <a href="register.html">
+            <button class="btn-white">Register for Free →</button>
+        </a>
+    </section>
+
+
+    <!-- ============================================================
+        FOOTER — Bottom of page
+        Left side: brand name + copyright
+        Right side: quick links
+    ============================================================ -->
+    <footer>
+
+        <!-- Left: brand + copyright -->
+        <div>
+            <div class="footer-logo">Medi<span>Queue</span></div>
+            <p>© 2025 MediQueue — Smart Doctor Appointment System</p>
+        </div>
+
+        <!-- Right: footer links — add more <a> tags here if needed -->
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </div>
+
+    </footer>
+
+
+    <!-- ============================================================
+        JAVASCRIPT
+        Two functions here:
+        1. Slider  — auto-advances every 3 seconds, dots are clickable
+        2. Search  — validates the location form before navigating
+    ============================================================ -->
+    <script>
+
+        /* ── 1. IMAGE SLIDER ─────────────────────────────────────────
+            How it works:
+            - All slides sit in a row inside .slider-wrapper
+            - We move the wrapper left by multiples of 100%
+            - overflow:hidden on .slider hides what's off screen
+            - The modulo (%) operator makes it loop back to slide 1
+        ─────────────────────────────────────────────────────────── */
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const wrapper = document.getElementById("sliderWrapper");
+            const dots    = document.querySelectorAll(".dot");
+            const slides  = document.querySelectorAll(".slide");
+            const total   = slides.length; // 3 slides total
+            let index     = 0;             // which slide is currently showing
+
+            /* Move to a specific slide number */
+            function goTo(n) {
+                // Keep index in range 0 to (total-1) using modulo
+                // e.g. goTo(3) when total=3 → index becomes 0 (loops back)
+                index = (n + total) % total;
+
+                // Shift the wrapper left: slide 0 = 0%, slide 1 = -100%, etc.
+                wrapper.style.transform = "translateX(-" + (index * 100) + "%)";
+
+                // Update dots: only the current one gets the "active" class
+                dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+            }
+
+            /* Auto-advance to next slide every 3000ms (3 seconds) */
+            let timer = setInterval(() => goTo(index + 1), 3000);
+
+            /* Clicking a dot jumps to that slide and resets the auto-timer */
+            dots.forEach((dot, i) => {
+                dot.addEventListener("click", () => {
+                    clearInterval(timer);               // stop current timer
+                    goTo(i);                            // jump to clicked dot's slide
+                    timer = setInterval(() => goTo(index + 1), 3000); // restart timer
+                });
+            });
+
+        });
+
+
+        /* ── 2. LOCATION SEARCH VALIDATION ──────────────────────────
+            Called when the "Search Doctors" button is clicked.
+            Checks that Country is selected before navigating.
+            When you connect to Flask, replace window.location.href
+            with a fetch() POST call to your /search endpoint.
+        ─────────────────────────────────────────────────────────── */
+        function handleSearch() {
+
+            // Get the value of all three dropdowns
+            const selects = document.querySelectorAll(".select-group select");
+            const country = selects[0].value;
+            const state   = selects[1].value;
+            const city    = selects[2].value;
+
+            // Validate: at minimum a country must be chosen
+            if (country === "Select Country") {
+                alert("Please select a country first.");
+                return; // stop here — don't navigate
+            }
+
+            // TODO: Replace this with a real fetch() to your Flask backend
+            // Example:
+            // fetch('/api/search-doctors', {
+            //     method: 'POST',
+            //     body: JSON.stringify({ country, state, city })
+            // })
+            window.location.href = "login.html";
+        }
+
+    </script>
+
+</body>
+</html>

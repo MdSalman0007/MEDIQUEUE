@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MediQueue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+
+        /* ── RESET ── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #f4f8fb;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        a { text-decoration: none; color: inherit; }
+        button { font-family: 'Nunito', sans-serif; cursor: pointer; border: none; }
+
+        /* ── NAVBAR ── */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: #007bff;
+            color: white;
+            box-shadow: 0 2px 12px rgba(0,123,255,0.3);
+        }
+        .logo img {
+            width: 180px;
+            object-fit: contain;
+        }
+        /* Fallback text logo */
+        .logo-text {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            display: none;
+        }
+        .logo-text span { color: #7dd3fc; }
+
+        .nav-right {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+        }
+        .nav-right a {
+            color: white;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .page-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(0,123,255,0.12);
+            padding: 44px 48px;
+            width: 100%;
+            max-width: 440px;
+            animation: fadeUp 0.5s ease both;
+        }
+
+        /* Card top — logo + title */
+        .card-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .card-logo {
+            margin-bottom: 20px;
+        }
+        .card-logo img {
+            height: 50px;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+        .card-logo .card-logo-text {
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #007bff;
+            display: none;
+        }
+        .card-logo .card-logo-text span { color: #00c2d4; }
+
+        .card-header h1 {
+            font-family: 'Lora', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #1a2332;
+            margin-bottom: 6px;
+        }
+        .card-header p {
+            font-size: 0.9rem;
+            color: #6b84a0;
+        }
+
+        /* ── FORM FIELDS ── */
+        .field {
+            margin-bottom: 18px;
+        }
+        .field label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #3d5068;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .field input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #dce8f5;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            color: #1a2332;
+            background: #f4f8fb;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .field input:focus {
+            border-color: #007bff;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        .field input.error {
+            border-color: #e53e3e;
+        }
+
+        /* password wrapper with eye toggle */
+        .input-wrap { position: relative; }
+        .input-wrap input { padding-right: 46px; }
+        .eye-btn {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #6b84a0;
+            padding: 4px;
+        }
+
+        /* error message under field */
+        .err-msg {
+            font-size: 0.78rem;
+            color: #e53e3e;
+            margin-top: 5px;
+            display: none;
+        }
+        .err-msg.show { display: block; }
+
+        /* ── ALERT BOX ── */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: none;
+        }
+        .alert.error {
+            display: block;
+            background: rgba(229,62,62,0.08);
+            color: #e53e3e;
+            border: 1px solid rgba(229,62,62,0.2);
+        }
+        .alert.success {
+            display: block;
+            background: rgba(0,123,255,0.08);
+            color: #007bff;
+            border: 1px solid rgba(0,123,255,0.2);
+        }
+
+        /* ── SUBMIT BUTTON ── */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 800;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(0,123,255,0.3);
+            margin-top: 6px;
+        }
+        .submit-btn:hover {
+            background: #0056d6;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0,123,255,0.35);
+        }
+        .submit-btn:disabled {
+            opacity: 0.7;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+        /* ── SPINNER ── */
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto;
+        }
+        .spinner.show { display: inline-block; }
+        .btn-text.hide { display: none; }
+
+        /* ── BOTTOM LINK ── */
+        .bottom-link {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 0.9rem;
+            color: #6b84a0;
+        }
+        .bottom-link a {
+            color: #007bff;
+            font-weight: 700;
+        }
+        .bottom-link a:hover { text-decoration: underline; }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="header">
+        <div class="logo">
+            <img
+                src="images/MediQueue_logo.png"
+                alt="MediQueue"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+            >
+            <div class="logo-text">Medi<span>Queue</span></div>
+        </div>
+        <div class="nav-right">
+            Don't have an account? <a href="register.html">Register</a>
+        </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <div class="page-body">
+        <div class="card">
+
+            <!-- Card header with logo + title -->
+            <div class="card-header">
+                <div class="card-logo">
+                    <img
+                        src="images/MediQueue_logo.png"
+                        alt="MediQueue"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                    >
+                    <div class="card-logo-text">Medi<span>Queue</span></div>
+                </div>
+                <h1>Welcome Back</h1>
+                <p>Sign in to book and manage your appointments</p>
+            </div>
+
+            <!-- Alert box — shown on error or success -->
+            <div class="alert" id="alertBox"></div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" onsubmit="login(); return false;">
+
+                <!-- Email field -->
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                    >
+                    <div class="err-msg" id="emailErr">Please enter a valid email.</div>
+                </div>
+
+                <!-- Password field with eye toggle -->
+                <div class="field">
+                    <label for="password">Password</label>
+                    <div class="input-wrap">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                        >
+                        <button type="button" class="eye-btn" id="eyeBtn" onclick="togglePwd()">👁️</button>
+                    </div>
+                    <div class="err-msg" id="passErr">Password must be at least 6 characters.</div>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text" id="btnText">Sign In</span>
+                    <span class="spinner" id="spinner"></span>
+                </button>
+
+            </form>
+
+            <!-- Link to register -->
+            <div class="bottom-link">
+                New to MediQueue? <a href="register.html">Create an account →</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
