@@ -381,9 +381,8 @@
                 <!-- Doctor-only: Country -->
                 <div class="field doctor-only" id="countryField">
                     <label for="country">Country</label>
-                    <select id="country" onchange="updateStates()">
+                    <select id="country" onchange="loadStates()">
                         <option value="">Select Country</option>
-                        <option value="Pakistan">Pakistan</option>
                         <option value="India">India</option>
                         <option value="USA">USA</option>
                         <option value="UK">UK</option>
@@ -394,7 +393,7 @@
                 <!-- Doctor-only: State -->
                 <div class="field doctor-only" id="stateField">
                     <label for="state">State / Province</label>
-                    <select id="state" onchange="updateCities()">
+                    <select id="state" onchange="loadCities()">
                         <option value="">Select State</option>
                     </select>
                     <div class="err-msg" id="stateErr">Please select a state.</div>

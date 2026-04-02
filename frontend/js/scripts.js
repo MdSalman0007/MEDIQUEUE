@@ -1010,6 +1010,8 @@ function toggleFaq(el) {
 document.addEventListener("DOMContentLoaded", () => {
   loadCountries();       // register page country dropdown
   loadSearchCountries(); // landing page search country dropdown
+  updateSearchStates();    // landing page search state dropdown
+  updateSearchCities();    // landing page search city dropdown
 });
 
 function filterByService(spec) {

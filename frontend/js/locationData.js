@@ -6,48 +6,6 @@
 
 const locationData = {
 
-  // ──────────────────────────────────────────
-  //  PAKISTAN — 4 Provinces + Territories
-  // ──────────────────────────────────────────
-  Pakistan: {
-    Punjab: [
-      "Lahore", "Faisalabad", "Rawalpindi", "Gujranwala", "Multan",
-      "Sialkot", "Bahawalpur", "Sargodha", "Sheikhupura", "Jhang",
-      "Rahim Yar Khan", "Gujrat", "Kasur", "Dera Ghazi Khan", "Sahiwal",
-      "Okara", "Wah Cantonment", "Dera Ismail Khan", "Muzaffargarh",
-      "Attock", "Mianwali", "Pakpattan", "Khanewal", "Hafizabad",
-      "Chiniot", "Narowal", "Mandi Bahauddin", "Bhakkar", "Layyah",
-      "Vehari", "Lodhran", "Khushab", "Toba Tek Singh", "Nankana Sahib"
-    ],
-    Sindh: [
-      "Karachi", "Hyderabad", "Sukkur", "Larkana", "Nawabshah",
-      "Mirpur Khas", "Jacobabad", "Shikarpur", "Khairpur", "Dadu",
-      "Badin", "Thatta", "Tando Allahyar", "Tando Adam", "Sanghar",
-      "Umerkot", "Ghotki", "Kamber Shahdadkot", "Kashmore", "Matiari"
-    ],
-    KPK: [
-      "Peshawar", "Abbottabad", "Mardan", "Mingora", "Kohat",
-      "Dera Ismail Khan", "Swabi", "Nowshera", "Charsadda", "Bannu",
-      "Mansehra", "Haripur", "Battagram", "Malakand", "Dir",
-      "Chitral", "Buner", "Shangla", "Lakki Marwat", "Tank"
-    ],
-    Balochistan: [
-      "Quetta", "Gwadar", "Turbat", "Khuzdar", "Hub",
-      "Chaman", "Zhob", "Sibi", "Dera Murad Jamali", "Kharan",
-      "Kalat", "Nushki", "Panjgur", "Loralai", "Mastung"
-    ],
-    "Azad Kashmir": [
-      "Muzaffarabad", "Mirpur", "Rawalakot", "Kotli", "Bagh",
-      "Bhimber", "Pallandri", "Hajira", "Forward Kahuta"
-    ],
-    "Gilgit-Baltistan": [
-      "Gilgit", "Skardu", "Chilas", "Ghanche", "Hunza",
-      "Astore", "Diamir", "Ghizer", "Shigar"
-    ],
-    "Islamabad Capital Territory": [
-      "Islamabad"
-    ]
-  },
 
   // ──────────────────────────────────────────
   //  INDIA — All 28 States + 8 UTs
