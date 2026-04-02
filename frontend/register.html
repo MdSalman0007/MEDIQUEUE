@@ -25,9 +25,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: #007bff;
+            background: #1a2332;
             color: white;
-            box-shadow: 0 2px 12px rgba(0,123,255,0.3);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
         }
         .logo img { width: 180px; object-fit: contain; }
         .logo-text {
@@ -279,14 +279,14 @@
 
     <!-- NAVBAR -->
     <header class="header">
-        <div class="logo">
+        <a href="index.html" class="logo">
             <img
                 src="images/MediQueue_logo.png"
                 alt="MediQueue"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
             >
             <div class="logo-text">Medi<span>Queue</span></div>
-        </div>
+        </a>
         <div class="nav-right">
             Already have an account? <a href="login.html">Sign In</a>
         </div>
@@ -313,10 +313,10 @@
             <!-- Role selector: Patient / Doctor -->
             <div class="role-row">
                 <button type="button" class="role-btn active" onclick="setRole(this,'patient')">
-                    <span class="role-icon">🤒</span> Patient
+                    <span class="role-icon"></span> Patient
                 </button>
                 <button type="button" class="role-btn" onclick="setRole(this,'doctor')">
-                    <span class="role-icon">👨‍⚕️</span> Doctor
+                    <span class="role-icon"></span> Doctor
                 </button>
             </div>
 
@@ -372,6 +372,42 @@
                     </select>
                     <div class="err-msg" id="specErr">Please select a specialization.</div>
                 </div>
+                <!-- Doctor-only: Experience -->
+                <div class="field doctor-only" id="expField">
+                    <label for="experience">Years of Experience</label>
+                    <input type="number" id="experience" placeholder="5" min="0" max="60">
+                </div>
+
+                <!-- Doctor-only: Country -->
+                <div class="field doctor-only" id="countryField">
+                    <label for="country">Country</label>
+                    <select id="country" onchange="updateStates()">
+                        <option value="">Select Country</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="UK">UK</option>
+                    </select>
+                    <div class="err-msg" id="countryErr">Please select a country.</div>
+                </div>
+
+                <!-- Doctor-only: State -->
+                <div class="field doctor-only" id="stateField">
+                    <label for="state">State / Province</label>
+                    <select id="state" onchange="updateCities()">
+                        <option value="">Select State</option>
+                    </select>
+                    <div class="err-msg" id="stateErr">Please select a state.</div>
+                </div>
+
+                <!-- Doctor-only: City -->
+                <div class="field doctor-only" id="cityField">
+                    <label for="city">City</label>
+                    <select id="city">
+                        <option value="">Select City</option>
+                    </select>
+                    <div class="err-msg" id="cityErr">Please select a city.</div>
+                </div>
 
                 <!-- Password -->
                 <div class="field">
@@ -406,7 +442,8 @@
                     </div>
                     <div class="err-msg" id="confirmErr">Passwords do not match.</div>
                 </div>
-
+                <!-- Add this wherever you want messages to appear -->
+                <div id="msgBox" style="display:none; padding:12px 16px; border-radius:10px; font-size:0.9rem; font-weight:600; margin-bottom:16px;"></div>
                 <!-- Submit -->
                 <button type="submit" class="submit-btn" id="submitBtn">
                     <span class="btn-text" id="btnText">Create Account</span>
@@ -423,6 +460,8 @@
     </div>
 
     <!-- Link to external JavaScript file -->
+     <script src="js/locationData.js"></script>
+
     <script src="js/scripts.js"></script>
 </body>
 </html>

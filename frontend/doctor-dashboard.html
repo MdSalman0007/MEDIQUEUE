@@ -20,39 +20,28 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: #007bff;
+            background: #1a2332;
             color: white;
-            box-shadow: 0 2px 12px rgba(0,123,255,0.3);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
             position: sticky;
             top: 0;
             z-index: 100;
         }
+        .logo { display: flex; align-items: center; height: 52px; text-decoration: none; cursor: pointer; }
         .logo img { width: 180px; object-fit: contain; }
-        .logo-text {
-            font-family: 'Lora', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            display: none;
-        }
+        .logo-text { font-family: 'Lora', serif; font-size: 1.5rem; font-weight: 700; color: white; display: none; }
         .logo-text span { color: #7dd3fc; }
         .nav-right { display: flex; align-items: center; gap: 16px; }
         .nav-username { font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 600; }
         .nav-badge {
             background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 700;
+            color: white; padding: 4px 12px;
+            border-radius: 20px; font-size: 0.78rem; font-weight: 700;
         }
         .logout-btn {
-            background: white;
-            color: #007bff;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 0.88rem;
+            background: white; color: #1a2332;
+            padding: 8px 18px; border-radius: 20px;
+            font-weight: 800; font-size: 0.88rem;
             transition: background 0.2s, color 0.2s, transform 0.15s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
@@ -64,22 +53,13 @@
         /* ── WELCOME BANNER ── */
         .welcome-banner {
             background: linear-gradient(120deg, #007bff 0%, #0056d6 60%, #00c2d4 100%);
-            border-radius: 16px;
-            padding: 28px 32px;
-            color: white;
-            margin-bottom: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            border-radius: 16px; padding: 28px 32px; color: white;
+            margin-bottom: 28px; display: flex;
+            align-items: center; justify-content: space-between;
             box-shadow: 0 8px 32px rgba(0,123,255,0.25);
             animation: fadeUp 0.5s ease both;
         }
-        .welcome-text h2 {
-            font-family: 'Lora', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
+        .welcome-text h2 { font-family: 'Lora', serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
         .welcome-text p { font-size: 0.9rem; opacity: 0.85; }
         .welcome-icon { font-size: 3.5rem; }
 
@@ -87,25 +67,19 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 28px;
+            gap: 20px; margin-bottom: 28px;
         }
         .stat-card {
-            background: white;
-            border-radius: 14px;
-            padding: 22px 20px;
+            background: white; border-radius: 14px; padding: 22px 20px;
             box-shadow: 0 4px 16px rgba(0,123,255,0.08);
             border: 1px solid #dce8f5;
-            display: flex;
-            align-items: center;
-            gap: 16px;
+            display: flex; align-items: center; gap: 16px;
             transition: transform 0.2s, box-shadow 0.2s;
             animation: fadeUp 0.5s ease both;
         }
         .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,123,255,0.14); }
         .stat-icon {
-            width: 50px; height: 50px;
-            border-radius: 12px;
+            width: 50px; height: 50px; border-radius: 12px;
             background: rgba(0,123,255,0.1);
             display: flex; align-items: center; justify-content: center;
             font-size: 1.4rem; flex-shrink: 0;
@@ -113,45 +87,43 @@
         .stat-icon.green  { background: rgba(56,161,105,0.1); }
         .stat-icon.orange { background: rgba(237,137,54,0.1); }
         .stat-icon.red    { background: rgba(229,62,62,0.1); }
-        .stat-num {
-            font-family: 'Lora', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a2332;
-        }
+        .stat-num { font-family: 'Lora', serif; font-size: 1.8rem; font-weight: 700; color: #1a2332; }
         .stat-label { font-size: 0.8rem; color: #6b84a0; font-weight: 600; margin-top: 2px; }
 
-        /* ── SECTION HEADING ── */
-        .section-heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
+        /* ── PROFILE CARD ── */
+        .profile-card {
+            background: white; border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,123,255,0.08);
+            border: 1px solid #dce8f5;
+            padding: 28px; margin-bottom: 28px;
+            display: flex; align-items: center; gap: 24px;
+            animation: fadeUp 0.5s ease both;
         }
-        .section-heading h2 {
-            font-family: 'Lora', serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1a2332;
+        .profile-avatar {
+            width: 72px; height: 72px; border-radius: 18px;
+            background: linear-gradient(135deg, #007bff, #00c2d4);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; color: white; font-weight: 800; flex-shrink: 0;
         }
-        .section-heading span { font-size: 0.82rem; color: #6b84a0; font-weight: 600; }
+        .profile-info h3 { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+        .profile-info p { font-size: 0.88rem; color: #6b84a0; margin-bottom: 2px; }
+        .profile-tag {
+            display: inline-block;
+            background: rgba(0,123,255,0.08); color: #007bff;
+            font-size: 0.75rem; font-weight: 700;
+            padding: 4px 12px; border-radius: 20px; margin-top: 8px;
+        }
 
         /* ── PANEL ── */
         .panel {
-            background: white;
-            border-radius: 14px;
+            background: white; border-radius: 14px;
             box-shadow: 0 4px 16px rgba(0,123,255,0.08);
-            border: 1px solid #dce8f5;
-            overflow: hidden;
-            margin-bottom: 28px;
-            animation: fadeUp 0.5s ease both;
+            border: 1px solid #dce8f5; overflow: hidden;
+            margin-bottom: 28px; animation: fadeUp 0.5s ease both;
         }
         .panel-header {
-            padding: 18px 24px;
-            border-bottom: 1px solid #dce8f5;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 18px 24px; border-bottom: 1px solid #dce8f5;
+            display: flex; align-items: center; justify-content: space-between;
         }
         .panel-title { font-weight: 800; font-size: 0.95rem; color: #1a2332; }
         .panel-count { font-size: 0.8rem; color: #6b84a0; font-weight: 600; }
@@ -159,134 +131,63 @@
         /* ── TABLE ── */
         .data-table { width: 100%; border-collapse: collapse; }
         .data-table th {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #6b84a0;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 12px 20px;
-            text-align: left;
-            background: #f4f8fb;
+            font-size: 0.72rem; font-weight: 700;
+            color: #6b84a0; text-transform: uppercase;
+            letter-spacing: 0.8px; padding: 12px 20px;
+            text-align: left; background: #f4f8fb;
         }
         .data-table td {
-            padding: 14px 20px;
-            border-top: 1px solid #dce8f5;
-            font-size: 0.875rem;
-            color: #3d5068;
+            padding: 14px 20px; border-top: 1px solid #dce8f5;
+            font-size: 0.875rem; color: #3d5068;
         }
         .data-table tr:hover td { background: rgba(0,123,255,0.02); }
 
         /* ── BADGES ── */
-        .badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 700;
-        }
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; }
         .badge-confirmed { background: rgba(56,161,105,0.1);  color: #38a169; }
         .badge-pending   { background: rgba(237,137,54,0.15); color: #c07a00; }
         .badge-cancelled { background: rgba(229,62,62,0.1);   color: #e53e3e; }
         .badge-completed { background: rgba(0,123,255,0.1);   color: #007bff; }
 
-        /* Avatar */
+        /* ── AVATAR ── */
         .avatar {
-            width: 34px; height: 34px;
-            border-radius: 9px;
+            width: 34px; height: 34px; border-radius: 9px;
             background: linear-gradient(135deg, #007bff, #00c2d4);
-            display: inline-flex;
-            align-items: center; justify-content: center;
-            color: white;
-            font-size: 0.78rem;
-            font-weight: 800;
-            margin-right: 10px;
-            vertical-align: middle;
+            display: inline-flex; align-items: center; justify-content: center;
+            color: white; font-size: 0.78rem; font-weight: 800;
+            margin-right: 10px; vertical-align: middle;
         }
 
         /* ── ACTION BUTTONS ── */
         .action-btn {
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1.5px solid;
-            margin-right: 4px;
+            padding: 5px 12px; border-radius: 8px;
+            font-size: 0.75rem; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
+            border: 1.5px solid; margin-right: 4px;
         }
         .btn-complete { border-color: rgba(56,161,105,0.3); color: #38a169; background: rgba(56,161,105,0.05); }
         .btn-complete:hover { background: rgba(56,161,105,0.12); }
-        .btn-cancel   { border-color: rgba(229,62,62,0.3);   color: #e53e3e; background: rgba(229,62,62,0.05); }
+        .btn-cancel   { border-color: rgba(229,62,62,0.3);  color: #e53e3e; background: rgba(229,62,62,0.05); }
         .btn-cancel:hover   { background: rgba(229,62,62,0.12); }
 
-        /* ── PROFILE CARD ── */
-        .profile-card {
-            background: white;
-            border-radius: 14px;
-            box-shadow: 0 4px 16px rgba(0,123,255,0.08);
-            border: 1px solid #dce8f5;
-            padding: 28px;
-            margin-bottom: 28px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            animation: fadeUp 0.5s ease both;
-        }
-        .profile-avatar {
-            width: 72px; height: 72px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, #007bff, #00c2d4);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            font-weight: 800;
-            flex-shrink: 0;
-        }
-        .profile-info h3 {
-            font-family: 'Lora', serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .profile-info p { font-size: 0.88rem; color: #6b84a0; margin-bottom: 2px; }
-        .profile-tag {
-            display: inline-block;
-            background: rgba(0,123,255,0.08);
-            color: #007bff;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-top: 8px;
-        }
-
-        /* ── EMPTY / LOADING ── */
+        /* ── LOADING / EMPTY ── */
         .loading-row td { text-align: center; padding: 40px; color: #6b84a0; }
         .empty-row td   { text-align: center; padding: 40px; color: #6b84a0; }
 
         /* ── TOAST ── */
         .toast {
-            position: fixed;
-            bottom: 28px; right: 28px;
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: white;
-            z-index: 2000;
-            transform: translateY(80px);
-            opacity: 0;
-            transition: all 0.3s;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            position: fixed; bottom: 28px; right: 28px;
+            padding: 14px 20px; border-radius: 12px;
+            font-size: 0.88rem; font-weight: 700; color: white;
+            z-index: 2000; transform: translateY(80px); opacity: 0;
+            transition: all 0.3s; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
         .toast.show    { transform: translateY(0); opacity: 1; }
         .toast.success { background: #38a169; }
         .toast.error   { background: #e53e3e; }
 
         /* ── ANIMATIONS ── */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
     </style>
 </head>
@@ -294,14 +195,14 @@
 
     <!-- NAVBAR -->
     <header class="header">
-        <div class="logo">
+        <a href="doctor-dashboard.html" class="logo">
             <img
                 src="images/MediQueue_logo.png"
                 alt="MediQueue"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
             >
             <div class="logo-text">Medi<span>Queue</span></div>
-        </div>
+        </a>
         <div class="nav-right">
             <span class="nav-badge">👨‍⚕️ Doctor</span>
             <span class="nav-username" id="navUsername"></span>
@@ -391,17 +292,14 @@
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
-    <!-- All functions are in scripts.js -->
+    <script src="js/locationData.js"></script>
     <script src="js/scripts.js"></script>
 
-    <!-- Page init — runs only on this page -->
+    <!-- Page init -->
     <script>
         const user = JSON.parse(localStorage.getItem("user"));
 
-        // Not logged in — go to login
         if (!user) { window.location.href = "login.html"; }
-
-        // Not a doctor — redirect to correct page
         if (user.role !== "doctor") {
             if (user.role === "admin") {
                 window.location.href = "admin-dashboard.html";
@@ -410,20 +308,16 @@
             }
         }
 
-        // Set welcome message and navbar
         document.getElementById("welcomeMsg").textContent  = "Welcome, Dr. " + user.name + " 👋";
         document.getElementById("navUsername").textContent = "Dr. " + user.name;
-
-        // Set profile card
         document.getElementById("profileName").textContent  = "Dr. " + user.name;
         document.getElementById("profileEmail").textContent = user.email;
 
-        // Set initials in profile avatar
         const initials = user.name.trim().split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
         document.getElementById("profileAvatar").textContent = initials;
 
-        // Load appointments on page open
         loadDoctorAppointments();
     </script>
+
 </body>
 </html>

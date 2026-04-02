@@ -35,6 +35,9 @@ export const userRegister = async(req , res) =>{
                 name:           newUser.name,
                 specialization: req.body.specialization || "General",
                 experience:     req.body.experience || 0,
+                country:        req.body.country || "India",
+                state:          req.body.state || "",
+                city:           req.body.city || "",
                 createdBy:      newUser._id
             })
         }

@@ -5,6 +5,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin: 0;
 }
 
 .container {
@@ -29,4 +30,101 @@ button {
   color: white;
   border: none;
   cursor: pointer;
+}
+.appt-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  border: 1px solid #dce8f5;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0,123,255,0.06);
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.section-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #dce8f5;
+  font-weight: 700;
+}
+
+
+
+.data-table th {
+  text-align: left;
+  padding: 12px;
+  background: #f4f8fb;
+  color: #6b84a0;
+  font-size: 0.85rem;
+}
+
+.data-table td {
+  padding: 12px;
+  border-top: 1px solid #dce8f5;
+}
+
+.data-table tr:hover {
+  background: #f9fbfd;
+}
+
+/* status badges */
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.badge-Confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badge-Cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+.panel {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #dce8f5;
+  overflow: hidden;
+  margin: 20px;
+}
+
+.panel-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #dce8f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+.panel-title {
+  font-size: 1rem;
+}
+
+.panel-count {
+  font-size: 0.85rem;
+  color: #6b84a0;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
 }

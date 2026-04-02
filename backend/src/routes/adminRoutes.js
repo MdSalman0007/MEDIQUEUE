@@ -8,6 +8,8 @@ import {
 } from "../controllers/adminController.js";
 import { protect }         from "../middleware/authMiddleware.js";
 import { authorizeRoles }  from "../middleware/roleMiddleware.js";
+import { getAllMessages } from "../controllers/contactController.js";
+
 
 const router = express.Router();
 
@@ -24,4 +26,6 @@ router.get("/appointments",  protect, authorizeRoles("admin"), getAllAppointment
 // Doctors
 router.delete("/doctors/:id", protect, authorizeRoles("admin"), deleteDoctor);
 
+// View all contact messages
+router.get("/messages", protect, authorizeRoles("admin"), getAllMessages);
 export default router;

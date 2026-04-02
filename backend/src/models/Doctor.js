@@ -15,6 +15,15 @@ const doctorSchema = new mongoose.Schema(
     experience: {
       type: Number
     },
+    country: {
+      type: String, default: "India"
+    },
+    state: {
+      type: String
+    },
+    city: {
+      type: String
+    },
 
     availableSlots: [
       {

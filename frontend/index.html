@@ -70,8 +70,8 @@
 
             padding: 0 36px;  /* left/right breathing room */
             height: 72px;
-            background: #1a6fd4;
-            box-shadow: 0 8px 32px rgba(26,111,212,0.14);
+            background: #1a2332;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
         }
 
         /* Logo container (holds the image) */
@@ -126,7 +126,7 @@
             padding: 10px 28px;
             border-radius: 999px;
             background: #ffffff;
-            color: #1a6fd4;
+            color: #1a2332;
             font-size: 0.95rem;
             font-weight: 800;
             transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
@@ -617,6 +617,213 @@
         }
 
 
+        /* ── ABOUT SECTION ── */
+        .about-section {
+            padding: 80px;
+            background: white;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-content h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a2332;
+            margin: 12px 0 20px;
+            line-height: 1.2;
+        }
+        .about-content p {
+            font-size: 0.95rem;
+            color: #6b84a0;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .about-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 32px;
+            padding-top: 28px;
+            border-top: 1px solid #dce8f5;
+        }
+        .about-stat { display: flex; flex-direction: column; }
+        .about-stat-num {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+        .about-stat-label {
+            font-size: 0.78rem;
+            color: #6b84a0;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        .about-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .about-card {
+            background: #f4f8fb;
+            border: 1px solid #dce8f5;
+            border-radius: 14px;
+            padding: 22px 18px;
+            transition: all 0.2s;
+        }
+        .about-card:hover {
+            border-color: #007bff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,123,255,0.1);
+        }
+        .about-card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+        .about-card h4 {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #1a2332;
+            margin-bottom: 6px;
+        }
+        .about-card p { font-size: 0.82rem; color: #6b84a0; line-height: 1.6; }
+
+        /* ── CONTACT SECTION ── */
+        .contact-section {
+            padding: 80px;
+            background: #f4f8fb;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 48px;
+            margin-top: 48px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .contact-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: rgba(0,123,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
+        }
+        .contact-item h4 {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #1a2332;
+            margin-bottom: 4px;
+        }
+        .contact-item p { font-size: 0.85rem; color: #6b84a0; }
+        .contact-form-box {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 24px rgba(0,123,255,0.08);
+            border: 1px solid #dce8f5;
+        }
+        .contact-field { margin-bottom: 16px; }
+        .contact-field label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #3d5068;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 7px;
+        }
+        .contact-field input,
+        .contact-field textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #dce8f5;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.93rem;
+            color: #1a2332;
+            background: #f4f8fb;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            resize: vertical;
+        }
+        .contact-field input:focus,
+        .contact-field textarea:focus {
+            border-color: #007bff;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        .contact-submit {
+            width: 100%;
+            padding: 13px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(0,123,255,0.3);
+        }
+        .contact-submit:hover {
+            background: #0056d6;
+            transform: translateY(-1px);
+        }
+
+        /* ── HELP / FAQ SECTION ── */
+        .help-section {
+            padding: 80px;
+            background: white;
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 48px;
+        }
+        .faq-item {
+            border: 1.5px solid #dce8f5;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+        .faq-item:hover { border-color: #007bff; }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1a2332;
+            background: white;
+            transition: background 0.2s;
+        }
+        .faq-question:hover { background: #f4f8fb; }
+        .faq-arrow {
+            font-size: 0.75rem;
+            color: #6b84a0;
+            transition: transform 0.3s;
+        }
+        .faq-answer {
+            display: none;
+            padding: 0 20px 18px;
+            font-size: 0.875rem;
+            color: #6b84a0;
+            line-height: 1.7;
+            background: white;
+        }
+        .faq-item.open .faq-answer { display: block; }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        .faq-item.open { border-color: #007bff; }
+
+
         /* ============================================================
             SECTION 7 — "HOW IT WORKS" STYLES
         ============================================================ */
@@ -827,7 +1034,7 @@
     <header class="header">
 
         <!-- Logo: tries to load image, falls back to styled text if not found -->
-        <div class="logo">
+        <a href="index.html" class="logo">
             <img
                 src="images/MediQueue_logo.png"
                 alt="MediQueue logo"
@@ -835,16 +1042,16 @@
             >
             <!-- This text logo is hidden by default, shown only if image fails -->
             <div class="logo-text" style="display:none">Medi<span>Queue</span></div>
-        </div>
+        </a>
 
         <!-- Navigation links — add or remove <a> tags to change the menu -->
         <nav class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#">About</a>
-            <a href="#">Doctors</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-            <a href="#">Help</a>
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#doctors">Doctors</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+            <a href="#help">Help</a>
         </nav>
 
         <!-- Login button — links to login.html -->
@@ -860,7 +1067,7 @@
         Left side: headline, paragraph, buttons, stats
         Right side: auto-sliding image carousel
     ============================================================ -->
-    <section class="hero">
+    <section class="hero" id="home">
 
         <!-- LEFT: Text content -->
         <div class="hero-content">
@@ -885,7 +1092,7 @@
                 <a href="login.html">
                     <button class="btn">📅 Book Appointment</button>
                 </a>
-                <a href="register.html">
+                <a href="#doctors">
                     <button class="btn-outline">👨‍⚕️ View Doctors</button>
                 </a>
             </div>
@@ -958,57 +1165,65 @@
         LOCATION SECTION — "Find Doctors Near You"
         Three dropdowns (Country / State / City) + Search button
     ============================================================ -->
-    <section class="location-section">
+    <section class="location-section" id="doctors">
+    <h2>Find Doctors Near You</h2>
+    <p class="section-sub">Search by location and specialization</p>
 
-        <h2>Find Doctors Near You</h2>
-        <p class="section-sub">Search by location to find the nearest available specialist</p>
+    <div class="location-box">
 
-        <div class="location-box">
-
-            <!-- Country dropdown — add more <option> tags to add countries -->
-            <div class="select-group">
-                <label>Country</label>
-                <select>
-                    <option>Select Country</option>
-                    <option>Pakistan</option>
-                    <option>India</option>
-                    <option>USA</option>
-                    <option>UK</option>
-                </select>
-            </div>
-
-            <!-- State dropdown -->
-            <div class="select-group">
-                <label>State / Province</label>
-                <select>
-                    <option>Select State</option>
-                    <option>Punjab</option>
-                    <option>Sindh</option>
-                    <option>KPK</option>
-                    <option>Maharashtra</option>
-                    <option>Delhi</option>
-                </select>
-            </div>
-
-            <!-- City dropdown -->
-            <div class="select-group">
-                <label>City</label>
-                <select>
-                    <option>Select City</option>
-                    <option>Lahore</option>
-                    <option>Karachi</option>
-                    <option>Islamabad</option>
-                    <option>Mumbai</option>
-                    <option>New Delhi</option>
-                </select>
-            </div>
-
-            <!-- Search button — calls handleSearch() in the script below -->
-            <button class="search-btn" onclick="handleSearch()">🔍 Search Doctors</button>
-
+        <div class="select-group">
+            <label>Country</label>
+            <select id="country" onchange="loadStates()">
+  <option value="">Select Country</option>
+</select>
         </div>
 
-    </section>
+        <div class="select-group">
+            <label>State</label>
+            <select id="state" onchange="loadCities()">
+  <option value="">Select State</option>
+</select>
+        </div>
+
+        <div class="select-group">
+            <label>City</label>
+            <select id="city">
+  <option value="">Select City</option>
+</select>
+        </div>
+
+        <div class="select-group">
+            <label>Specialization</label>
+            <select id="searchSpec">
+                <option value="">All Specializations</option>
+                <option>Cardiology</option>
+                <option>Neurology</option>
+                <option>Dermatology</option>
+                <option>Orthopedics</option>
+                <option>Ophthalmology</option>
+                <option>Dentistry</option>
+                <option>Pulmonology</option>
+                <option>General Medicine</option>
+                <option>Pediatrics</option>
+                <option>Gynecology</option>
+            </select>
+        </div>
+
+        <button class="search-btn" onclick="searchDoctorsLive()">
+            🔍 Search Doctors
+        </button>
+
+    </div>
+
+    <!-- Search Results -->
+    <div id="searchResults" style="margin-top:32px; display:none;">
+        <div id="searchResultsList" style="
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+            gap:20px;
+        "></div>
+    </div>
+</section>
 
 
     <!-- ============================================================
@@ -1016,7 +1231,7 @@
         To add a new specialization: copy one .spec-card block,
         change the emoji, h4 text, and p text.
     ============================================================ -->
-    <section class="spec-section">
+    <section class="spec-section" id="services">
 
         <div class="section-header">
             <div class="section-tag">Browse by Specialization</div>
@@ -1027,42 +1242,42 @@
         <div class="spec-grid">
 
             <!-- Each card: emoji icon | specialty name | short description -->
-            <div class="spec-card" onclick="window.location='login.html'">
+            <div class="spec-card" onclick="filterByService('Cardiology')">
                 <span class="spec-icon">❤️</span>
                 <h4>Cardiology</h4>
                 <p>Heart & cardiovascular care</p>
             </div>
-            <div class="spec-card" onclick="window.location='login.html'">
+            <div class="spec-card" onclick="filterByService('Neurology')">
                 <span class="spec-icon">🧠</span>
                 <h4>Neurology</h4>
                 <p>Brain & nervous system</p>
             </div>
-            <div class="spec-card" onclick="window.location='login.html'">
+            <div class="spec-card" onclick="filterByService('Dentistry')">
                 <span class="spec-icon">🦷</span>
                 <h4>Dentistry</h4>
                 <p>Oral & dental health</p>
             </div>
-            <div class="spec-card" onclick="window.location='login.html'">
+            <div class="spec-card" onclick="filterByService('Ophthalmology')">
                 <span class="spec-icon">👁️</span>
                 <h4>Ophthalmology</h4>
                 <p>Eyes & vision care</p>
             </div>
-            <div class="spec-card" onclick="window.location='login.html'">
+            <div class="spec-card" onclick="filterByService('Orthopedics')">
                 <span class="spec-icon">🦴</span>
                 <h4>Orthopedics</h4>
                 <p>Bones, joints & spine</p>
             </div>
-            <div class="spec-card" onclick="window.location='login.html'">
+            <div class="spec-card" onclick="filterByService('Dermatology')">
                 <span class="spec-icon">🧬</span>
                 <h4>Dermatology</h4>
                 <p>Skin, hair & nails</p>
             </div>
-            <div class="spec-card" onclick="window.location='login.html'">
+            <div class="spec-card" onclick="filterByService('Pulmonology')">
                 <span class="spec-icon">🫁</span>
                 <h4>Pulmonology</h4>
                 <p>Lungs & respiratory</p>
             </div>
-            <div class="spec-card" onclick="window.location='login.html'">
+            <div class="spec-card" onclick="filterByService('General Medicine')">
                 <span class="spec-icon">🌡️</span>
                 <h4>General Medicine</h4>
                 <p>Primary healthcare</p>
@@ -1078,9 +1293,9 @@
         The connecting line between circles is drawn by CSS only.
         To add a 5th step: copy a .step-card block and add it here.
     ============================================================ -->
-    <section class="how-section">
+    <section class="how-section" id="works">
 
-        <div class="section-header">
+        <div class="section-header" >
             <div class="section-tag">Simple Process</div>
             <h2>How MediQueue Works</h2>
             <p>Book your appointment in just 4 easy steps</p>
@@ -1115,6 +1330,208 @@
         </div>
 
     </section>
+    <!-- ── ABOUT SECTION ── -->
+<section class="about-section" id="about">
+    <div class="about-grid">
+
+        <div class="about-content">
+            <div class="section-tag">About MediQueue</div>
+            <h2>Smarter Healthcare<br>Starts Here</h2>
+            <p>
+                MediQueue is a smart doctor appointment system built to eliminate
+                long waiting times and make healthcare accessible to everyone.
+                We connect patients with verified doctors across all major
+                specializations — instantly and securely.
+            </p>
+            <p>
+                Our platform is built with the latest technology to ensure
+                your data is safe, your bookings are confirmed in real time,
+                and your healthcare experience is seamless from start to finish.
+            </p>
+            <div class="about-stats">
+                <div class="about-stat">
+                    <span class="about-stat-num">200+</span>
+                    <span class="about-stat-label">Verified Doctors</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-num">10k+</span>
+                    <span class="about-stat-label">Happy Patients</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-num">15+</span>
+                    <span class="about-stat-label">Specializations</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-cards">
+            <div class="about-card">
+                <div class="about-card-icon">🔒</div>
+                <h4>Secure & Private</h4>
+                <p>Your data is encrypted and protected with industry standard security.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon">⚡</div>
+                <h4>Instant Booking</h4>
+                <p>Book appointments in seconds with real-time slot availability.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon">👨‍⚕️</div>
+                <h4>Verified Doctors</h4>
+                <p>All doctors are verified professionals with proven expertise.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon">📱</div>
+                <h4>Easy to Use</h4>
+                <p>Simple intuitive interface works on any device anywhere.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ── CONTACT SECTION ── -->
+<section class="contact-section" id="contact">
+    <div class="section-header">
+        <div class="section-tag">Get In Touch</div>
+        <h2>Contact Us</h2>
+        <p>Have a question? We are here to help you</p>
+    </div>
+
+    <div class="contact-grid">
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div>
+                    <h4>Email Us</h4>
+                    <p>support@mediqueue.com</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div>
+                    <h4>Call Us</h4>
+                    <p>+91 62045 28936</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div>
+                    <h4>Location</h4>
+                    <p>Madhya Pradesh, India</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">⏰</div>
+                <div>
+                    <h4>Working Hours</h4>
+                    <p>Mon - Sat: 9AM - 6PM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form-box">
+            <div id="contactMsg" style="display:none; padding:12px 16px; border-radius:10px; font-size:0.9rem; font-weight:600; margin-bottom:16px;"></div>
+            <div class="contact-field">
+                <label>Your Name</label>
+                <input type="text" id="contactName" placeholder="Ali Khan">
+            </div>
+            <div class="contact-field">
+                <label>Email Address</label>
+                <input type="email" id="contactEmail" placeholder="ali@example.com">
+            </div>
+            <div class="contact-field">
+                <label>Message</label>
+                <textarea id="contactMessage" rows="4" placeholder="Write your message here…"></textarea>
+            </div>
+            <button class="contact-submit" onclick="sendContact()">Send Message →</button>
+        </div>
+
+    </div>
+</section>
+<!-- ── HELP SECTION ── -->
+<section class="help-section" id="help">
+    <div class="section-header">
+        <div class="section-tag">Help Center</div>
+        <h2>Frequently Asked Questions</h2>
+        <p>Everything you need to know about MediQueue</p>
+    </div>
+
+    <div class="faq-grid">
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>How do I book an appointment?</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Register or login to your account, browse available doctors,
+                select your preferred doctor, choose a date and time slot,
+                and confirm your booking. You will receive instant confirmation.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Can I cancel my appointment?</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Yes. Go to your patient dashboard, find the appointment
+                you want to cancel, and click the Cancel button.
+                Cancellations are free of charge.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Is my personal data safe?</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Absolutely. We use industry standard encryption, bcrypt
+                password hashing, JWT secure tokens, and role-based access
+                control to keep your data completely safe.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>How do I register as a doctor?</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Go to the Register page, select the Doctor role,
+                fill in your details including specialization,
+                and submit. Your account will be created immediately.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Is MediQueue free to use?</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                Yes. Registering and booking appointments on MediQueue
+                is completely free for patients. No hidden charges.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What specializations are available?</span>
+                <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                We cover Cardiology, Neurology, Dermatology, Orthopedics,
+                Ophthalmology, Dentistry, Pulmonology, General Medicine,
+                Pediatrics, Gynecology and more.
+            </div>
+        </div>
+
+    </div>
+</section>
 
 
     <!-- ============================================================
@@ -1140,14 +1557,14 @@
         <!-- Left: brand + copyright -->
         <div>
             <div class="footer-logo">Medi<span>Queue</span></div>
-            <p>© 2025 MediQueue — Smart Doctor Appointment System</p>
+            <p>© 2026 MediQueue — Smart Doctor Appointment System</p>
         </div>
 
         <!-- Right: footer links — add more <a> tags here if needed -->
         <div class="footer-links">
-            <a href="#">About</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Contact</a>
+            <a href="#about">About</a>
+            <a href="#works">Work Flow</a>
+            <a href="#contact">Contact</a>
             <a href="login.html">Login</a>
             <a href="register.html">Register</a>
         </div>
@@ -1161,81 +1578,40 @@
         1. Slider  — auto-advances every 3 seconds, dots are clickable
         2. Search  — validates the location form before navigating
     ============================================================ -->
-    <script>
+    <script src="js/locationData.js"></script>
+<script src="js/scripts.js"></script>
 
-        /* ── 1. IMAGE SLIDER ─────────────────────────────────────────
-            How it works:
-            - All slides sit in a row inside .slider-wrapper
-            - We move the wrapper left by multiples of 100%
-            - overflow:hidden on .slider hides what's off screen
-            - The modulo (%) operator makes it loop back to slide 1
-        ─────────────────────────────────────────────────────────── */
-        document.addEventListener("DOMContentLoaded", function () {
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
-            const wrapper = document.getElementById("sliderWrapper");
-            const dots    = document.querySelectorAll(".dot");
-            const slides  = document.querySelectorAll(".slide");
-            const total   = slides.length; // 3 slides total
-            let index     = 0;             // which slide is currently showing
+    const wrapper = document.getElementById("sliderWrapper");
+    const dots    = document.querySelectorAll(".dot");
+    const slides  = document.querySelectorAll(".slide");
+    const total   = slides.length;
+    let index     = 0;
 
-            /* Move to a specific slide number */
-            function goTo(n) {
-                // Keep index in range 0 to (total-1) using modulo
-                // e.g. goTo(3) when total=3 → index becomes 0 (loops back)
-                index = (n + total) % total;
+    function goTo(n) {
+        index = (n + total) % total;
+        wrapper.style.transform = "translateX(-" + (index * 100) + "%)";
+        dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+    }
 
-                // Shift the wrapper left: slide 0 = 0%, slide 1 = -100%, etc.
-                wrapper.style.transform = "translateX(-" + (index * 100) + "%)";
+    let timer = setInterval(() => goTo(index + 1), 3000);
 
-                // Update dots: only the current one gets the "active" class
-                dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
-            }
-
-            /* Auto-advance to next slide every 3000ms (3 seconds) */
-            let timer = setInterval(() => goTo(index + 1), 3000);
-
-            /* Clicking a dot jumps to that slide and resets the auto-timer */
-            dots.forEach((dot, i) => {
-                dot.addEventListener("click", () => {
-                    clearInterval(timer);               // stop current timer
-                    goTo(i);                            // jump to clicked dot's slide
-                    timer = setInterval(() => goTo(index + 1), 3000); // restart timer
-                });
-            });
-
+    dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => {
+            clearInterval(timer);
+            goTo(i);
+            timer = setInterval(() => goTo(index + 1), 3000);
         });
+    });
 
+    // ✅ SAFE CALLS
+    if (typeof loadCountries === "function") loadCountries();
+    if (typeof loadSearchCountries === "function") loadSearchCountries();
 
-        /* ── 2. LOCATION SEARCH VALIDATION ──────────────────────────
-            Called when the "Search Doctors" button is clicked.
-            Checks that Country is selected before navigating.
-            When you connect to Flask, replace window.location.href
-            with a fetch() POST call to your /search endpoint.
-        ─────────────────────────────────────────────────────────── */
-        function handleSearch() {
-
-            // Get the value of all three dropdowns
-            const selects = document.querySelectorAll(".select-group select");
-            const country = selects[0].value;
-            const state   = selects[1].value;
-            const city    = selects[2].value;
-
-            // Validate: at minimum a country must be chosen
-            if (country === "Select Country") {
-                alert("Please select a country first.");
-                return; // stop here — don't navigate
-            }
-
-            // TODO: Replace this with a real fetch() to your Flask backend
-            // Example:
-            // fetch('/api/search-doctors', {
-            //     method: 'POST',
-            //     body: JSON.stringify({ country, state, city })
-            // })
-            window.location.href = "login.html";
-        }
-
-    </script>
+});
+</script>
 
 </body>
 </html>

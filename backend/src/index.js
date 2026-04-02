@@ -11,6 +11,8 @@ import { errorHandler } from "./middleware/errorMiddleware.js";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import cors from "cors";
+import contactRoutes from "./routes/contactRoutes.js";
+import { autoCompleteAppointments } from "./controllers/appointmentController.js";
 
 dotenv.config();
 
@@ -51,6 +53,7 @@ app.use("/api/doctors", doctorRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/admin", adminRoutes);
 app.use(errorHandler);
+app.use("/api/contact", contactRoutes);
 
 const PORT = process.env.PORT || 6969;
 app.listen(port, () => {

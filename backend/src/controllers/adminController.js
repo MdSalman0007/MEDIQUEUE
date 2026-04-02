@@ -16,8 +16,8 @@ export const getAllUsers = async (req, res) => {
 export const getAllAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find()
-      .populate("userId",   "name email")
-      .populate("doctorId", "name specialization");
+      .populate("userId",   "name")
+      .populate("doctorId", "name");
     res.json(appointments);
   } catch (error) {
     res.status(500).json({ message: "Server error" });

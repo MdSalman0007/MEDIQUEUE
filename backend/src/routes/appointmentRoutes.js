@@ -2,14 +2,12 @@ import express from "express";
 import {
   bookAppointment,
   getMyAppointments,
-  cancelAppointment,
   getDoctorAppointments,
-  markAppointmentCompleted,
+  updateAppointmentStatus,
   getAllAppointments,
-  rescheduleAppointment
+  cancelAppointment
 } from "../controllers/appointmentController.js";
-
-import { protect } from "../middleware/authMiddleware.js";
+import { protect }        from "../middleware/authMiddleware.js";
 import { authorizeRoles } from "../middleware/roleMiddleware.js";
 
 const router = express.Router();
@@ -19,64 +17,25 @@ const router = express.Router();
 ========================= */
 
 // Book appointment
-router.post(
-  "/",
-  protect,
-  authorizeRoles("patient"),
-  bookAppointment
-);
+router.post("/",    protect, authorizeRoles("patient"), bookAppointment);
 
-// Get my appointments
-router.get(
-  "/my",
-  protect,
-  authorizeRoles("patient"),
-  getMyAppointments
-);
+// Get my own appointments
+router.get("/my",   protect, authorizeRoles("patient"), getMyAppointments);
 
-// Cancel appointment
-router.put(
-  "/:id/cancel",
-  protect,
-  authorizeRoles("patient"),
-  cancelAppointment
-);
-// Reschedule appointment
-router.put(
-  "/:id/reschedule",
-  protect,
-  authorizeRoles("patient"),
-  rescheduleAppointment
-);
-
-export default router;
+// Cancel my appointment
+router.delete("/:id", protect, authorizeRoles("patient"), cancelAppointment);
 
 /* =========================
    DOCTOR ROUTES
 ========================= */
 
-// View doctor's appointments
-router.get(
-  "/doctor",
-  protect,
-  authorizeRoles("doctor"),
-  getDoctorAppointments
-);
+// Get doctor's own appointments
+router.get("/doctor", protect, authorizeRoles("doctor"), getDoctorAppointments);
 
-// Mark appointment completed
-router.put(
-  "/:id/complete",
-  protect,
-  authorizeRoles("doctor"),
-  markAppointmentCompleted
-);
 /* =========================
-   ADMIN ROUTES
+   SHARED ROUTE — doctor + admin + patient
+   Update appointment status (complete / cancel / confirm)
 ========================= */
+router.put("/:id/status", protect, updateAppointmentStatus);
 
-router.get(
-  "/all",
-  protect,
-  authorizeRoles("admin"),
-  getAllAppointments
-);
+export default router;

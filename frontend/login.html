@@ -25,9 +25,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: #007bff;
+            background: #1a2332;
             color: white;
-            box-shadow: 0 2px 12px rgba(0,123,255,0.3);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
         }
         .logo img {
             width: 180px;
@@ -253,14 +253,14 @@
 
     <!-- NAVBAR -->
     <header class="header">
-        <div class="logo">
+        <a href="index.html" class="logo">
             <img
                 src="images/MediQueue_logo.png"
                 alt="MediQueue"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
             >
             <div class="logo-text">Medi<span>Queue</span></div>
-        </div>
+        </a>
         <div class="nav-right">
             Don't have an account? <a href="register.html">Register</a>
         </div>
@@ -316,6 +316,8 @@
                     </div>
                     <div class="err-msg" id="passErr">Password must be at least 6 characters.</div>
                 </div>
+                <!-- Add this wherever you want messages to appear -->
+                <div id="msgBox" style="display:none; padding:12px 16px; border-radius:10px; font-size:0.9rem; font-weight:600; margin-bottom:16px;"></div>
 
                 <!-- Submit button -->
                 <button type="submit" class="submit-btn" id="submitBtn">
@@ -334,6 +336,8 @@
     </div>
 
     <!-- Link to external JavaScript file -->
+     <script src="js/locationData.js"></script>
+
     <script src="js/scripts.js"></script>
 </body>
 </html>
