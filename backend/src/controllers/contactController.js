@@ -1,4 +1,4 @@
-import Contact from "../models/Contact.js";
+import Contact from "../models/contact.js";
 
 // Save contact message to database
 export const sendContactMessage = async (req, res) => {
