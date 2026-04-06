@@ -1,5 +1,4 @@
-const API = "http://localhost:6969/api";
-
+const API = "https://mediqueue-backend-az6w.onrender.com/api";
 // ============================================================
 //  REGISTER PAGE — Role selector
 // ============================================================
