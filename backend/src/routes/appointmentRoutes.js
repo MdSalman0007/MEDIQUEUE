@@ -4,7 +4,6 @@ import {
   getMyAppointments,
   getDoctorAppointments,
   updateAppointmentStatus,
-  getAllAppointments,
   cancelAppointment
 } from "../controllers/appointmentController.js";
 import { protect }        from "../middleware/authMiddleware.js";
