@@ -63,40 +63,51 @@ export const userRegister = async(req , res) =>{
 
 // ---------- Login user ------------
 
-export const userLogin = async(req , res) =>{
-    const { email , password} =req.body
-    if( !email || !password){
-        return res.status(400).json({ message : "Please provide email and password"})
-    }
-    try{
-        const user = await User.findOne({email})
-        if(!user){
-            return res.status(400).json({ message : "Invalid credentials"})
+export const userLogin = async (req, res) => {
+    try {
+        console.log("BODY:", req.body);
+
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "Missing fields" });
         }
-        // Compare password
-        const isMatch = await bcrypt.compare(password , user.password)
-        if(!isMatch){
-            return res.status(400).json({ message : "Invalid credentials"})
+
+        const user = await User.findOne({ email });
+        console.log("USER:", user);
+
+        if (!user) {
+            return res.status(400).json({ message: "User not found" });
         }
-        // Generate JWT token
-        const token =jwt.sign({
-            id: user._id,
-            role: user.role
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: "1h"}
-        )
+
+        if (!user.password) {
+            return res.status(500).json({ message: "Password missing in DB" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(400).json({ message: "Wrong password" });
+        }
+
+        if (!process.env.JWT_SECRET) {
+            return res.status(500).json({ message: "JWT_SECRET missing" });
+        }
+
+        const token = jwt.sign(
+            { id: user._id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
         res.status(200).json({
-            message: "Login successfully",
+            message: "Login success",
             token,
-            user:{
-                id:user._id,
-                name: user.name,
-                email: user.email,
-                role: user.role
-            }
-        })
-    } catch(error){
-        res.status(500).json({message: "Server error"})
+            user
+        });
+
+    } catch (error) {
+        console.error("LOGIN ERROR:", error); // 🔥 THIS WILL SHOW REAL ERROR
+        res.status(500).json({ message: "Server error" });
     }
-}
+};
