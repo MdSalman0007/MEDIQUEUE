@@ -273,6 +273,74 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
+
+        /* ================= REGISTER MOBILE FIX ================= */
+
+@media (max-width: 768px) {
+
+  /* HEADER */
+  .header {
+    padding: 10px 15px;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  .nav-right {
+    font-size: 0.8rem;
+    text-align: right;
+  }
+
+  /* PAGE BODY */
+  .page-body {
+    padding: 20px 10px;
+  }
+
+  /* CARD */
+  .card {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+
+  /* TITLE */
+  .card-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .card-header p {
+    font-size: 0.85rem;
+  }
+
+  /* ROLE BUTTONS STACK */
+  .role-row {
+    flex-direction: column;
+  }
+
+  /* INPUTS */
+  .field input,
+  .field select {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  /* TWO COLUMN → SINGLE */
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* BUTTON */
+  .submit-btn {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  /* BOTTOM LINK */
+  .bottom-link {
+    font-size: 0.85rem;
+  }
+
+}
     </style>
 </head>
 <body>

@@ -414,6 +414,91 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
 
+        /* ================= PATIENT DASHBOARD MOBILE FIX ================= */
+
+@media (max-width: 768px) {
+
+  /* DASHBOARD PADDING */
+  .dashboard {
+    padding: 16px;
+  }
+
+  /* HEADER */
+  .header {
+    padding: 10px 15px;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  .nav-username {
+    display: none; /* hide name for space */
+  }
+
+  /* WELCOME */
+  .welcome-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .welcome-icon {
+    font-size: 2rem;
+  }
+
+  /* STATS STACK */
+  .stats-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* DOCTOR CARDS */
+  .doctor-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* TABLE SCROLL */
+  .panel {
+    overflow-x: auto;
+  }
+
+  .data-table {
+    min-width: 600px;
+  }
+
+  /* BUTTONS */
+  .book-btn {
+    width: 100%;
+  }
+
+  .action-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  /* MODAL FIX */
+  .modal {
+    padding: 20px;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  body {
+    padding-top: 70px;
+  }
+
+}
     </style>
 </head>
 <body>

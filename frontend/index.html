@@ -1021,7 +1021,200 @@
             0%, 100% { transform: scale(1);   opacity: 1; }
             50%       { transform: scale(1.4); opacity: 0.6; }
         }
+        /* ================= MOBILE RESPONSIVE FIX ================= */
 
+        @media (max-width: 768px) {
+
+        /* Reduce all big paddings */
+        .hero,
+        .location-section,
+        .spec-section,
+        .about-section,
+        .contact-section,
+        .cta-banner,
+        .how-section {
+            padding: 20px !important;
+        }
+
+        /* Hero layout → stack vertically */
+        .hero {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* Fix hero text size */
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        /* Slider width fix */
+        .slider-frame {
+            width: 100%;
+        }
+
+        /* Navbar fix */
+        .desktop-header {
+        height: auto;
+        padding: 10px;
+    }
+
+        .nav-links {
+            flex-wrap: wrap;
+            justify-content: center;
+            display: none !important; /* hide desktop nav links on mobile */
+        }
+
+        /* Grids → single column */
+        .spec-grid,
+        .steps-grid,
+        .about-grid,
+        .contact-grid,
+        .faq-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        /* Location box */
+        .location-box {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        /* Buttons full width */
+        .btn,
+        .btn-outline,
+        .search-btn{
+            width: 100%;
+        }
+        }
+
+            /* DEFAULT */
+        .mobile-header {
+        display: none;
+        }
+
+        .desktop-header {
+        display: flex;
+        }
+        .mobile-menu {
+            display: none;
+        }
+        /* MOBILE MENU LINKS */
+        .mobile-menu li {
+        padding: 12px;
+        transition: background 0.3s;
+        }
+
+        .mobile-menu li a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        }
+
+        /* HOVER EFFECT */
+        .mobile-menu li:hover {
+        background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* CLICK EFFECT */
+        .mobile-menu li:active {
+        background: rgba(0, 123, 255, 0.3);
+        }
+
+        /* MOBILE VIEW */
+        @media (max-width: 768px) {
+
+        .mobile-header {
+            position: fixed;
+            top: 0; left: 0; width: 100%; z-index: 1000;
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: #1a2332;
+            transition: all 0.3s ease;
+        }
+        body{
+            padding-top: 60px; /* adds space for the fixed header */
+        }
+
+        /* LEFT */
+        .menu-toggle {
+            flex: 1;
+            font-size: 22px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* CENTER */
+        .logo {
+            flex: 1;
+            text-align: center;
+        }
+
+        .logo img {
+            height: 35px;
+        }
+
+        /* RIGHT */
+        .auth-btn {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .login-button {
+            width: auto !important;   /* 🚨 FIX MAIN ISSUE */
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* DROPDOWN MENU */
+        .mobile-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: #1a2332;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu li {
+            padding: 12px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-menu a {
+            color: white;
+            font-size: 14px;
+        }
+        }
+        /* ================= FINAL HEADER FIX ================= */
+
+        /* Default (Desktop) */
+        .desktop-header {
+        display: flex !important;
+        }
+
+        .mobile-header {
+        display: none !important;
+        }
+
+        /* Mobile View */
+        @media (max-width: 768px) {
+
+        .desktop-header {
+            display: none !important;
+        }
+
+        .mobile-header {
+            display: flex !important;
+        }
+        }
     </style>
 </head>
 
@@ -1031,7 +1224,7 @@
         HEADER — Sticky navigation bar at the top
         Contains: Logo | Nav Links | Login Button
     ============================================================ -->
-    <header class="header">
+    <header class="header desktop-header">
 
         <!-- Logo: tries to load image, falls back to styled text if not found -->
         <a href="index.html" class="logo">
@@ -1060,6 +1253,32 @@
         </a>
 
     </header>
+    <!-- Mobile header with hamburger menu -->
+    <header class="mobile-header">
+
+    <!-- LEFT -->
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+
+    <!-- CENTER -->
+    ,<a href="index.html"><div class="logo">
+        <img src="images/MediQueue_logo.png">
+    </div></a>
+
+    <!-- RIGHT -->
+    <div class="auth-btn">
+        <button class="login-button">Login</button>
+    </div>
+
+    </header>
+
+    <ul class="mobile-menu" id="mobile-menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#doctors">Doctors</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#help">Help</a></li>
+    </ul>
 
 
     <!-- ============================================================
